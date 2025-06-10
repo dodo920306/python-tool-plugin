@@ -9,7 +9,6 @@ import hudson.tools.ToolInstallation;
 import hudson.tools.ToolInstaller;
 import hudson.tools.ToolInstallerDescriptor;
 import org.kohsuke.stapler.DataBoundConstructor;
-import org.kohsuke.stapler.DataBoundSetter;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -26,8 +25,8 @@ public class PythonInstaller extends ToolInstaller {
     private final String version;
 
     @DataBoundConstructor
-    public PythonInstaller(String version) {
-        super("python");
+    public PythonInstaller(String label, String version) {
+        super(label);
         this.version = version;
     }
 
