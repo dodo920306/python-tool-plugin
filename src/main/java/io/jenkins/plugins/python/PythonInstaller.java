@@ -23,21 +23,16 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class PythonInstaller extends ToolInstaller {
-    private String version;
+    private final String version;
 
     @DataBoundConstructor
     public PythonInstaller(String version) {
         super("python");
-        setVersion(version);
+        this.version = version;
     }
 
     public String getVersion() {
         return version;
-    }
-
-    @DataBoundSetter
-    public void setVersion(String version) {
-        this.version = version;
     }
 
     @Override

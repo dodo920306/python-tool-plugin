@@ -3,6 +3,7 @@ package io.jenkins.plugins.python;
 import hudson.Extension;
 import hudson.tools.ToolDescriptor;
 import hudson.tools.ToolInstallation;
+import hudson.tools.ToolInstaller;
 import hudson.tools.ToolProperty;
 import org.jenkinsci.Symbol;
 import org.kohsuke.stapler.DataBoundConstructor;
@@ -18,12 +19,6 @@ public class PythonInstallation extends ToolInstallation {
     @Extension
     @Symbol("python")
     public static class PythonToolDescriptor extends ToolDescriptor<PythonInstallation> {
-        private PythonInstallation[] installations = new PythonInstallation[0];
-
-        public PythonToolDescriptor() {
-            load();
-        }
-
         @Override
         public String getDisplayName() {
             return "Python";
@@ -31,13 +26,19 @@ public class PythonInstallation extends ToolInstallation {
 
         @Override
         public PythonInstallation[] getInstallations() {
-            return installations;
+            load();
+            return super.getInstallations();
         }
 
         @Override
         public void setInstallations(PythonInstallation... installations) {
-            this.installations = installations;
+            super.setInstallations(installations);
             save();
+        }
+
+        @Override
+        public List<? extends ToolInstaller> getDefaultInstallers() {
+            return super.getDefaultInstallers();
         }
     }
 

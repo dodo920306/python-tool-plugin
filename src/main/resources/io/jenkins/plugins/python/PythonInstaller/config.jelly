@@ -1,10 +1,20 @@
 <?jelly escape-by-default='true'?>
-<j:jelly xmlns:j="jelly:core" xmlns:f="/lib/form">
+<j:jelly xmlns:j="jelly:core" xmlns:f="/lib/form" xmlns:jelly="jelly:core">
     <f:entry title="Python Version" field="version">
         <select name="${field}">
-            <f:option value="">(Select version)</f:option>
+            <j:if test="${empty(instance.version)}">
+                <f:option value="" selected="true">(Select version)</f:option>
+            </j:if>
+
             <j:forEach var="v" items="${descriptor.availableVersions}">
-                <f:option value="${v}">${v}</f:option>
+                <j:choose>
+                    <j:when test="${v == instance.version}">
+                        <f:option value="${v}" selected="true">${v}</f:option>
+                    </j:when>
+                    <j:otherwise>
+                        <f:option value="${v}">${v}</f:option>
+                    </j:otherwise>
+                </j:choose>
             </j:forEach>
         </select>
     </f:entry>
